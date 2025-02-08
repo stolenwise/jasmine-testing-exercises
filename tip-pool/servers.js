@@ -39,6 +39,22 @@ function updateServerTable() {
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
 
+    appendDeleteBtn(newTr);
+
     serverTbody.append(newTr);
   }
+}
+
+function appendDeleteBtn(tr) {
+  let deleteTd = document.createElement('td');
+  deleteTd.innerText = 'X';
+
+  // Optional: Add an event listener to remove the row when clicked
+  deleteTd.addEventListener('click', function () {
+    tr.remove();
+    delete allServers[tr.id];  // Clean up the associated data
+    updateServerTable();       // Update the table display
+  });
+
+  tr.appendChild(deleteTd);  // Add the 'X' button to the row
 }
